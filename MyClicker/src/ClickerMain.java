@@ -355,8 +355,13 @@ public class ClickerMain {
           screenHeight = (int)screenSize.getHeight();
     }
 
+    ImageIcon backGround = new ImageIcon("res/buttonBackground.jpg");
+
     public void createUI(){
         JFrame window = new JFrame("Pain");
+       
+        window.setContentPane(new JLabel(backGround));
+    
         window.setSize(screenWidth, screenHeight);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.getContentPane().setBackground(Color.black);
@@ -364,29 +369,32 @@ public class ClickerMain {
         window.setLayout(null);
 
         
+        
         buttonPanel = new JPanel();
-        buttonPanel.setBounds((int)(screenWidth-screenWidth*0.95), (int)(screenHeight-screenHeight*0.30), 200, 220);
+        buttonPanel.setBounds((int)(screenWidth-screenWidth*0.95), (int)(screenHeight-screenHeight*0.35), 320, 320);
         buttonPanel.setBackground(Color.black);
         
         window.add(buttonPanel);
         
-        ImageIcon button = new ImageIcon("res/button.png");
+        ImageIcon button = new ImageIcon("res/myButton.png");
         
         JButton buttonButton = new JButton();
         buttonButton.setBackground(Color.black);
+        buttonButton.setBorderPainted(false);
         buttonButton.setFocusPainted(false);
         buttonButton.setBorder(null);
         buttonButton.addActionListener(cHandler);
         buttonButton.setActionCommand("click");
         buttonButton.setIcon(button);
         buttonButton.setContentAreaFilled(false);
+        buttonButton.setContentAreaFilled(false);
 
         buttonPanel.add(buttonButton);
 
         counterPanel = new JPanel();
         counterPanel.setBounds((int)(screenWidth-screenWidth*0.95), (int)(screenHeight-screenHeight*0.96), 350, 150);
-        counterPanel.setBackground(Color.black);
         counterPanel.setLayout(new GridLayout(2,1));
+        counterPanel.setBackground(Color.black);
 
         window.add(counterPanel);
 
@@ -495,5 +503,6 @@ public class ClickerMain {
 
         window.setVisible(true);
     }
+
 
 }
