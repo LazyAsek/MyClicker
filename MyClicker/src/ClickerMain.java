@@ -355,16 +355,13 @@ public class ClickerMain {
           screenHeight = (int)screenSize.getHeight();
     }
 
-    ImageIcon backGround = new ImageIcon("res/buttonBackground.jpg");
+    
 
     public void createUI(){
         JFrame window = new JFrame("Pain");
-       
-        window.setContentPane(new JLabel(backGround));
-    
         window.setSize(screenWidth, screenHeight);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.getContentPane().setBackground(Color.black);
+        window.getContentPane().setBackground(Color.darkGray);
         window.setExtendedState(JFrame.MAXIMIZED_BOTH);
         window.setLayout(null);
 
@@ -372,14 +369,14 @@ public class ClickerMain {
         
         buttonPanel = new JPanel();
         buttonPanel.setBounds((int)(screenWidth-screenWidth*0.95), (int)(screenHeight-screenHeight*0.35), 320, 320);
-        buttonPanel.setBackground(Color.black);
+        buttonPanel.setBackground(Color.darkGray);
         
         window.add(buttonPanel);
         
         ImageIcon button = new ImageIcon("res/myButton.png");
         
         JButton buttonButton = new JButton();
-        buttonButton.setBackground(Color.black);
+        buttonButton.setBackground(Color.darkGray);
         buttonButton.setBorderPainted(false);
         buttonButton.setFocusPainted(false);
         buttonButton.setBorder(null);
@@ -394,7 +391,7 @@ public class ClickerMain {
         counterPanel = new JPanel();
         counterPanel.setBounds((int)(screenWidth-screenWidth*0.95), (int)(screenHeight-screenHeight*0.96), 350, 150);
         counterPanel.setLayout(new GridLayout(2,1));
-        counterPanel.setBackground(Color.black);
+        counterPanel.setBackground(Color.darkGray);
 
         window.add(counterPanel);
 
@@ -412,7 +409,7 @@ public class ClickerMain {
 
         buildingsPanel = new JPanel();
         buildingsPanel.setBounds((int)(screenWidth-screenWidth*0.35),(int)(screenHeight-screenHeight*0.96),600,900);
-        buildingsPanel.setBackground(Color.black);
+        buildingsPanel.setBackground(Color.darkGray);
         buildingsPanel.setLayout(new GridLayout(6,1));
         
         window.add(buildingsPanel);
@@ -485,13 +482,13 @@ public class ClickerMain {
 
         messagePanel=new JPanel();
         messagePanel.setBounds((int)(screenWidth-screenWidth*0.4555),(int)(screenHeight-screenHeight*0.96),200,150);
-        messagePanel.setBackground(Color.black);
+        messagePanel.setBackground(Color.darkGray);
 
         window.add(messagePanel);
 
         messageText = new JTextArea();
         messageText.setBounds((int)(screenWidth-screenWidth*0.4555),(int)(screenHeight-screenHeight*0.96),200,150);
-        messageText.setBackground(Color.black);
+        messageText.setBackground(Color.darkGray);
         messageText.setForeground(Color.white);
         messageText.setFont(font2);
         messageText.setLineWrap(true);
