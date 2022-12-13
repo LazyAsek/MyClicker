@@ -29,6 +29,7 @@ public class ClickerMain {
     int mouseNumber,mousePrice,soldiersNumber,soldiersPrice,bearsNumber,bearsPrice,robotsNumber,robotsPrice,carsNumber,
     carsPrice,swordsmenNumber,swordsmenPrice;
     double perSec;
+    double mousePerSec,soldierPerSec,bearsPerSec,robotsPerSec,carsPerSec,swordsmenPerSec;
     Font font1,font2;
     boolean timerOn,soldiersUnlocked,bearsUnlocked,robotsUnlocked,carsUnlocked,swordsmenUnlocked,betterTimer;
     clickHandler cHandler = new clickHandler();
@@ -45,6 +46,12 @@ public class ClickerMain {
         betterTimer=false;
         
         perSec=0;
+        mousePerSec=0;
+        soldierPerSec=0;
+        bearsPerSec=0;
+        robotsPerSec=0;
+        carsPerSec=0;
+        swordsmenPerSec=0;
         buttonCounter=9000;
 
         mouseNumber=0;
@@ -130,6 +137,7 @@ public class ClickerMain {
     }
     //updates per sec
     public void timerUpdate(){
+        perSec = mousePerSec+soldierPerSec+bearsPerSec+robotsPerSec+carsPerSec+swordsmenPerSec;
         if(timerOn==false){
             timerOn=true;
         }
@@ -168,7 +176,7 @@ public class ClickerMain {
                  mousePrice=(int)(mousePrice + mousePrice*0.10);
                  counterLabel.setText(buttonCounter+"");
                  mouses.setText("Mouses ("+mouseNumber+")");
-                 perSec=perSec+0.2;
+                 mousePerSec = mousePerSec+0.2;
                  messageText.setText("Mouse\nPrice-"+mousePrice+"\n Clicks once per 10 secounds");
                  timerUpdate();
                 }else{
@@ -182,7 +190,7 @@ public class ClickerMain {
                     soldiersPrice = (int)(soldiersPrice + soldiersPrice*0.10);
                     counterLabel.setText(buttonCounter+"");
                     soldiers.setText("Soldiers("+soldiersNumber+")");
-                    perSec=perSec+2;
+                    soldierPerSec=soldierPerSec+2;
                     messageText.setText("Soldiers\nPrice"+soldiersPrice+"\nClicks 2 times per sec");
                     timerUpdate();
                 }else{
@@ -196,7 +204,7 @@ public class ClickerMain {
                     bearsPrice = (int)(bearsPrice+bearsPrice*0.10);
                     counterLabel.setText(buttonCounter+"");
                     bears.setText("Bears("+bearsNumber+")");
-                    perSec+=20;
+                    bearsPerSec+=20;
                     messageText.setText("Bears\nPrice"+bearsPrice+"\nClicks 2 times per sec");
                     timerUpdate();
                 }else{
@@ -210,7 +218,7 @@ public class ClickerMain {
                     robotsPrice = (int)(robotsPrice+robotsPrice*0.10);
                     counterLabel.setText(buttonCounter+"");
                     robots.setText("Robots("+robotsNumber+")");
-                    perSec+=40;
+                    robotsPerSec+=40;
                     messageText.setText("Robots\nPrice"+robotsPrice+"\nClicks 2 times per sec");
                     timerUpdate();
                 }else{
@@ -224,7 +232,7 @@ public class ClickerMain {
                     carsPrice = (int)(carsPrice+carsPrice*0.10);
                     counterLabel.setText(buttonCounter+"");
                     cars.setText("Cars("+carsNumber+")");
-                    perSec+=80;
+                    carsPerSec+=80;
                     messageText.setText("Cars\nPrice"+carsPrice+"\nClicks 2 times per sec");
                     timerUpdate();
                 }else{
@@ -238,7 +246,7 @@ public class ClickerMain {
                     swordsmenPrice = (int)(swordsmenPrice+swordsmenPrice*0.10);
                     counterLabel.setText(buttonCounter+"");
                     swordsmen.setText("Swordsmen("+swordsmenNumber+")");
-                    perSec+=160;
+                    swordsmenPerSec+=160;
                     messageText.setText("Swordsmen\nPrice"+swordsmenPrice+"\nClicks 2 times per sec");
                     timerUpdate();
                 }else{
@@ -356,12 +364,13 @@ public class ClickerMain {
     }
 
     
+    Color transparent = new Color(0,0,0,0);
 
     public void createUI(){
         JFrame window = new JFrame("Pain");
         window.setSize(screenWidth, screenHeight);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.getContentPane().setBackground(Color.darkGray);
+        window.getContentPane().setBackground(new Color(118,219,139));
         window.setExtendedState(JFrame.MAXIMIZED_BOTH);
         window.setLayout(null);
 
@@ -369,7 +378,8 @@ public class ClickerMain {
         
         buttonPanel = new JPanel();
         buttonPanel.setBounds((int)(screenWidth-screenWidth*0.95), (int)(screenHeight-screenHeight*0.35), 320, 320);
-        buttonPanel.setBackground(Color.darkGray);
+        buttonPanel.setBackground(transparent);
+        buttonPanel.setOpaque(false);
         
         window.add(buttonPanel);
         
@@ -388,12 +398,21 @@ public class ClickerMain {
 
         buttonPanel.add(buttonButton);
 
+        ImageIcon counterpanelBackground = new ImageIcon("res/counterpanelBackground.jpg");
+
+        JLabel counterbackground = new JLabel();
+        counterbackground.setBounds((int)(screenWidth-screenWidth*0.98), (int)(screenHeight-screenHeight*0.96), 350, 150);
+        counterbackground.setIcon(counterpanelBackground);
+
+
         counterPanel = new JPanel();
         counterPanel.setBounds((int)(screenWidth-screenWidth*0.95), (int)(screenHeight-screenHeight*0.96), 350, 150);
         counterPanel.setLayout(new GridLayout(2,1));
-        counterPanel.setBackground(Color.darkGray);
-
+        counterPanel.setBackground(transparent);
+        counterPanel.setOpaque(false);
+        
         window.add(counterPanel);
+        window.add(counterbackground);
 
         counterLabel = new JLabel(buttonCounter+"");
         counterLabel.setForeground(Color.white);
@@ -409,87 +428,108 @@ public class ClickerMain {
 
         buildingsPanel = new JPanel();
         buildingsPanel.setBounds((int)(screenWidth-screenWidth*0.35),(int)(screenHeight-screenHeight*0.96),600,900);
-        buildingsPanel.setBackground(Color.darkGray);
+        buildingsPanel.setBackground(transparent);
+        buildingsPanel.setOpaque(false);
         buildingsPanel.setLayout(new GridLayout(6,1));
-        
+
+        ImageIcon ButtonBackground = new ImageIcon("res/buttonBuilding.jpg");
+
         window.add(buildingsPanel);
 
         mouses = new JButton("Mouses");
+        mouses.setIcon(ButtonBackground);
         mouses.setBorder(null);
         mouses.setFont(font1);
         mouses.setFocusPainted(false);
         mouses.addActionListener(cHandler);
         mouses.setActionCommand("Mouses");
         mouses.addMouseListener(mHandler);
-        mouses.setBackground(Color.blue);
+        mouses.setBackground(transparent);
+        mouses.setHorizontalTextPosition(JButton.CENTER);
+        mouses.setVerticalTextPosition(JButton.CENTER);
 
         buildingsPanel.add(mouses);
 
         soldiers = new JButton("?");
+        soldiers.setIcon(ButtonBackground);
         soldiers.setBorder(null);
         soldiers.setFont(font1);
         soldiers.setFocusPainted(false);
         soldiers.addActionListener(cHandler);
         soldiers.setActionCommand("Soldiers");
         soldiers.addMouseListener(mHandler);
-        soldiers.setBackground(Color.blue);
+        soldiers.setBackground(transparent);
+        soldiers.setHorizontalTextPosition(JButton.CENTER);
+        soldiers.setVerticalTextPosition(JButton.CENTER);
 
         buildingsPanel.add(soldiers);
 
         bears = new JButton("?");
+        bears.setIcon(ButtonBackground);
         bears.setBorder(null);
         bears.setFont(font1);
         bears.setFocusPainted(false);
         bears.addActionListener(cHandler);
         bears.setActionCommand("Bears");
-        bears.setBackground(Color.blue);
+        bears.setBackground(transparent);
         bears.addMouseListener(mHandler);
+        bears.setHorizontalTextPosition(JButton.CENTER);
+        bears.setVerticalTextPosition(JButton.CENTER);
 
         buildingsPanel.add(bears);
 
         robots = new JButton("?");
+        robots.setIcon(ButtonBackground);
         robots.setBorder(null);
         robots.setFont(font1);
         robots.setFocusPainted(false);
         robots.addActionListener(cHandler);
         robots.setActionCommand("Robots");
-        robots.setBackground(Color.blue);
+        robots.setBackground(transparent);
         robots.addMouseListener(mHandler);
+        robots.setHorizontalTextPosition(JButton.CENTER);
+        robots.setVerticalTextPosition(JButton.CENTER);
 
         buildingsPanel.add(robots);
 
         cars = new JButton("?");
+        cars.setIcon(ButtonBackground);
         cars.setBorder(null);
         cars.setFont(font1);
         cars.setFocusPainted(false);
         cars.addActionListener(cHandler);
         cars.setActionCommand("Cars");
-        cars.setBackground(Color.blue);
+        cars.setBackground(transparent);
         cars.addMouseListener(mHandler);
+        cars.setHorizontalTextPosition(JButton.CENTER);
+        cars.setVerticalTextPosition(JButton.CENTER);
 
         buildingsPanel.add(cars);
 
         swordsmen = new JButton("?");
+        swordsmen.setIcon(ButtonBackground);
         swordsmen.setBorder(null);
         swordsmen.setFont(font1);
         swordsmen.setFocusPainted(false);
         swordsmen.addActionListener(cHandler);
         swordsmen.setActionCommand("Swordsmen");
-        swordsmen.setBackground(Color.blue);
+        swordsmen.setBackground(transparent);
         swordsmen.addMouseListener(mHandler);
+        swordsmen.setHorizontalTextPosition(JButton.CENTER);
+        swordsmen.setVerticalTextPosition(JButton.CENTER);
 
         buildingsPanel.add(swordsmen);
 
         messagePanel=new JPanel();
         messagePanel.setBounds((int)(screenWidth-screenWidth*0.4555),(int)(screenHeight-screenHeight*0.96),200,150);
-        messagePanel.setBackground(Color.darkGray);
+        messagePanel.setBackground( new Color(28,132,41));
 
         window.add(messagePanel);
 
         messageText = new JTextArea();
         messageText.setBounds((int)(screenWidth-screenWidth*0.4555),(int)(screenHeight-screenHeight*0.96),200,150);
-        messageText.setBackground(Color.darkGray);
-        messageText.setForeground(Color.white);
+        messageText.setBackground( new Color(28,132,41));
+        messageText.setForeground(Color.black);
         messageText.setFont(font2);
         messageText.setLineWrap(true);
         messageText.setWrapStyleWord(true);
